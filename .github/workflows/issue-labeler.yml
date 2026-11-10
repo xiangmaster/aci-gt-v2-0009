@@ -10,8 +10,7 @@ jobs:
   gather-labels:
     name: Generate label suggestions
     # Prevent runs on forks (requires OpenAI API key, wastes Actions minutes)
-    if: github.repository == 'xiangmaster/aci-gt-v2-0009' && (github.event.action == 'opened' || (github.event.action == 'labeled' && github.event.label.name ==
-      'codex-label'))
+    if: github.repository == 'xiangmaster/aci-gt-v2-0009' && (github.event.action == 'opened' || (github.event.action == 'labeled' && github.event.label.name == 'codex-label'))
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -107,6 +106,7 @@ jobs:
             "additionalProperties": false
           }
 
+        responses-api-endpoint: ${{ secrets.CODEX_RESPONSES_API_ENDPOINT }}
   apply-labels:
     name: Apply labels from Codex output
     needs: gather-labels
